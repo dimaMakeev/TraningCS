@@ -10,7 +10,7 @@ namespace SeleniumNunit
     {
 
         IWebDriver driver;
-        WebDriverWait wait;
+
 
         public static Customer BuildCustomer()
         {
@@ -21,15 +21,21 @@ namespace SeleniumNunit
         public void SetupDriver()
         {
             driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-
+            
         }
 
         [Test]
-        public void MainScenario(Customer cr)
+        public void SearchAndBuy()
         {
+            var MainPage = new MainPage(driver);
+            MainPage.SearchFor("T-Shirt");
 
+        }
 
+        [TearDown]
+        public void QuitDriver()
+        {
+            driver.Quit();
         }
     }
 }
